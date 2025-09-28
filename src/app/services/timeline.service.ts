@@ -7,12 +7,20 @@ import { TimelineItem } from '../models/timeline-item.model';
 export class TimelineService {
   private timelineItems: TimelineItem[] = [
     {
+        id: 'lcp',
+        title: 'LCPtracker Inc.',
+        subtitle: 'SDE 2',
+        period: 'June 2025 - Present',
+        image: 'assets/files/Pictures/uofa.png',
+        position: 'left'
+      },
+    {
       id: 'masters-graduation',
-      title: 'Expected Graduation',
+      title: 'Graduated',
       subtitle: 'MS in Data Science',
       period: 'May, 2025',
       image: 'assets/files/Pictures/uofa.png',
-      position: 'left'
+      position: 'right'
     },
     {
       id: 'health-sciences',
@@ -20,7 +28,7 @@ export class TimelineService {
       subtitle: 'GenAI Application Developer',
       period: 'Jan 2025 - Present',
       image: 'assets/files/Pictures/uofa_healthsciences.png',
-      position: 'right',
+      position: 'left',
       imageClass: 'timeline-image-healthsciences'
     },
     {
@@ -29,7 +37,7 @@ export class TimelineService {
       subtitle: 'Process Automation Specialist',
       period: 'Sep 2023 - Jan 2025',
       image: 'assets/files/Pictures/uofa.png',
-      position: 'left'
+      position: 'right'
     },
     {
       id: 'masters-start',
@@ -37,7 +45,7 @@ export class TimelineService {
       subtitle: 'MS in Data Science',
       period: 'Fall 2023',
       image: 'assets/files/Pictures/uofa.png',
-      position: 'right'
+      position: 'left'
     },
     {
       id: 'infosys-senior',
@@ -45,7 +53,7 @@ export class TimelineService {
       subtitle: 'Senior Systems Engineer',
       period: 'Sep 2022 - Jun 2024',
       image: 'assets/files/Pictures/infosys.png',
-      position: 'left'
+      position: 'right'
     },
     {
       id: 'infosys-systems',
@@ -53,7 +61,7 @@ export class TimelineService {
       subtitle: 'Systems Engineer',
       period: 'Feb 2020 - Aug 2022',
       image: 'assets/files/Pictures/infosys.png',
-      position: 'right'
+      position: 'left'
     },
     {
       id: 'infosys-trainee',
@@ -61,7 +69,7 @@ export class TimelineService {
       subtitle: 'Systems Engineer Trainee',
       period: 'September, 2019',
       image: 'assets/files/Pictures/infosys.png',
-      position: 'left'
+      position: 'right'
     },
     {
       id: 'ecell-lead',
@@ -69,7 +77,7 @@ export class TimelineService {
       subtitle: 'Technical Lead',
       period: '2017',
       image: 'assets/files/Pictures/ecell.png',
-      position: 'right',
+      position: 'left',
       imageClass: 'ecell-image'
     },
     {
@@ -78,7 +86,7 @@ export class TimelineService {
       subtitle: 'Executive Member',
       period: '2016',
       image: 'assets/files/Pictures/ecell.png',
-      position: 'left',
+      position: 'right',
       imageClass: 'ecell-image'
     },
     {
@@ -87,7 +95,7 @@ export class TimelineService {
       subtitle: 'BE in Computer Science',
       period: '2015 - 2019',
       image: 'assets/files/Pictures/sati.jpg',
-      position: 'right'
+      position: 'left'
     }
   ];
 
