@@ -1,0 +1,39 @@
+.downloads-section {
+    padding: 100px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .downloads-section h2 {
+    color: #00aaff;
+    font-size: 2rem;
+    margin-bottom: 50px;
+  }
+  
+  .downloads-container {
+    text-align: center;
+  }
+  
+  .download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #00aaff;
+    color: #000;
+    padding: 15px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 170, 255, 0.3);
+  }
+  
+  .download-link:hover {
+    background: #e6e600;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(230, 230, 0, 0.3);
+  }

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-downloads',
-  imports: [],
   templateUrl: './downloads.component.html',
-  styleUrl: './downloads.component.scss'
+  styleUrls: ['./downloads.component.scss'],
+  standalone: true
 })
 export class DownloadsComponent {
-
+  constructor() {}
 }
