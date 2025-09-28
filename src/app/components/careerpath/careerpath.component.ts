@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TimelineService } from '../../services/timeline.service';
+import { TimelineItem } from '../../models/timeline-item.model';
 
 @Component({
-  selector: 'app-careerpath',
-  imports: [],
-  templateUrl: './careerpath.component.html',
-  styleUrl: './careerpath.component.scss'
+  selector: 'app-career-path',
+  templateUrl: './career-path.component.html',
+  styleUrls: ['./career-path.component.scss'],
+  standalone: true
 })
-export class CareerpathComponent {
+export class CareerPathComponent implements OnInit {
+  timelineItems: TimelineItem[] = [];
 
+  constructor(private timelineService: TimelineService) {}
+
+  ngOnInit(): void {
+    this.timelineItems = this.timelineService.getTimelineItems();
+  }
 }
