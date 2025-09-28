@@ -1,11 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { BackgroundService } from '../../services/background.service';
 
 @Component({
   selector: 'app-background',
-  imports: [],
   templateUrl: './background.component.html',
-  styleUrl: './background.component.scss'
+  styleUrls: ['./background.component.scss'],
+  standalone: true
 })
-export class BackgroundComponent {
+export class BackgroundComponent implements AfterViewInit {
+  @ViewChild('backgroundCanvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
 
+  constructor(private backgroundService: BackgroundService) {}
+
+  ngAfterViewInit(): void {
+    this.backgroundService.initializeBackground(this.canvas.nativeElement);
+  }
 }
