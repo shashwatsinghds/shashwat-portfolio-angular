@@ -1,1 +1,41 @@
-<p>contact works!</p>
+<section id="contact" class="section contact-section">
+    <h2>Contact</h2>
+    <div class="contact-container">
+      <!-- Social Profiles -->
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="bi bi-envelope"></i>
+        </div>
+        <h3>Social Profiles</h3>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/shashwatsinghds" target="_blank">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a href="https://github.com/shashwatsinghds" target="_blank">
+            <i class="bi bi-github"></i>
+          </a>
+        </div>
+      </div>
+  
+      <!-- Email Me -->
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="bi bi-envelope"></i>
+        </div>
+        <h3>Email Me</h3>
+        <p>
+          shashwatsingh1@arizona.edu
+          <i class="bi bi-clipboard copy-icon" (click)="copyEmail('shashwatsingh1@arizona.edu')"></i>
+        </p>
+        <p>
+          singhshashwat1996@gmail.com
+          <i class="bi bi-clipboard copy-icon" (click)="copyEmail('singhshashwat1996@gmail.com')"></i>
+        </p>
+        
+        <!-- Notification Message -->
+        <div id="copyNotification" class="copy-notification" [class.show]="showNotification">
+          Email copied to clipboard!
+        </div>
+      </div>
+    </div>
+  </section>

@@ -2,10 +2,19 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-contact',
-  imports: [],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+  styleUrls: ['./contact.component.scss'],
+  standalone: true
 })
 export class ContactComponent {
+  showNotification = false;
 
+  copyEmail(email: string): void {
+    navigator.clipboard.writeText(email).then(() => {
+      this.showNotification = true;
+      setTimeout(() => {
+        this.showNotification = false;
+      }, 2000);
+    });
+  }
 }
