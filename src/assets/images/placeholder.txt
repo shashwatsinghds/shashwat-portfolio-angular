@@ -1,0 +1,7 @@
+# Placeholder for images
+# Add your project images here:
+# - Project 1.png
+# - Project 2.png  
+# - Project 3.png
+# - Project 4.png
+# - Project 5.png

@@ -13,6 +13,8 @@ export class BackgroundComponent implements AfterViewInit {
   constructor(private backgroundService: BackgroundService) {}
 
   ngAfterViewInit(): void {
-    this.backgroundService.initializeBackground(this.canvas.nativeElement);
+    setTimeout(() => {
+      this.backgroundService.initializeBackground(this.canvas.nativeElement);
+    }, 100);
   }
 }

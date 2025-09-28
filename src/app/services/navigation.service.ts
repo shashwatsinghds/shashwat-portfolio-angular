@@ -10,22 +10,16 @@ export class NavigationService {
   constructor(private router: Router) {}
 
   scrollToSection(sectionId: string): void {
-    // First navigate to the route
-    this.router.navigate([`/${sectionId}`]);
-    
-    // Then scroll to the section with offset for navbar
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - this.navbarHeight;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }, 100);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - this.navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   }
 
   getActiveSection(): string {
