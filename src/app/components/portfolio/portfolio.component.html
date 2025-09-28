@@ -1,1 +1,51 @@
-<p>portfolio works!</p>
+<section id="portfolio" class="section portfolio-section">
+    <h2>Portfolio</h2>
+    <div class="portfolio-container">
+      <div class="portfolio-item" *ngFor="let project of projects" (click)="openModal(project)">
+        <div class="portfolio-image-wrapper">
+          <img [src]="project.image" [alt]="project.title" class="portfolio-image" />
+          <div class="portfolio-title-overlay">
+            <h3>{{ project.title }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Project Modal -->
+    <div class="portfolio-modal" [class.active]="selectedProject" *ngIf="selectedProject">
+      <div class="modal-content">
+        <span class="close-modal" (click)="closeModal()">&times;</span>
+        <div class="modal-flex-container">
+          <div class="modal-carousel-section">
+            <div class="carousel-container">
+              <div class="carousel-track">
+                <img *ngFor="let slide of selectedProject.slides" [src]="slide" [alt]="selectedProject.title" class="carousel-slide">
+              </div>
+              <div class="carousel-indicators"></div>
+              <div class="carousel-nav carousel-prev" (click)="previousSlide()">
+                <i class="bi bi-chevron-left"></i>
+              </div>
+              <div class="carousel-nav carousel-next" (click)="nextSlide()">
+                <i class="bi bi-chevron-right"></i>
+              </div>
+              <div class="carousel-play-pause" (click)="toggleAutoPlay()">
+                <i class="bi" [class.bi-play-fill]="!isAutoPlaying" [class.bi-pause-fill]="isAutoPlaying"></i>
+              </div>
+            </div>
+          </div>
+          <div class="modal-text-section">
+            <h3>{{ selectedProject.title }}</h3>
+            <ul>
+              <li><strong>Project URL</strong>: <a [href]="selectedProject.githubUrl" target="_blank">{{ selectedProject.title }} Project</a></li>
+            </ul>
+            <p>{{ selectedProject.description }}</p>
+            <p>Key highlights:</p>
+            <ul>
+              <li *ngFor="let highlight of selectedProject.highlights">{{ highlight }}</li>
+            </ul>
+            <p><strong>Impact:</strong> {{ selectedProject.impact }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
