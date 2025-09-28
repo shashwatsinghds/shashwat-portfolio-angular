@@ -14,5 +14,5 @@ export const routes: Routes = [
   { path: 'career-path', component: CareerPathComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'downloads', component: DownloadsComponent },
-  { path: '**', redirectTo: '/home' } // Wildcard route for 404
+  { path: '**', redirectTo: '/home' }
 ];
