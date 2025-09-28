@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TimelineService } from '../../services/timeline.service';
 import { TimelineItem } from '../../models/timeline-item.model';
 
 @Component({
   selector: 'app-career-path',
-  templateUrl: './career-path.component.html',
-  styleUrls: ['./career-path.component.scss'],
+  templateUrl: './careerpath.component.html',
+  styleUrls: ['./careerpath.component.scss'],
+  imports: [CommonModule],
   standalone: true
 })
 export class CareerPathComponent implements OnInit {

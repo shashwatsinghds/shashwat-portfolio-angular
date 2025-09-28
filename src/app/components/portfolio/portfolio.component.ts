@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { PortfolioService } from '../../services/portfolio.services';
 import { Project } from '../../models/project.model';
 
@@ -6,6 +7,7 @@ import { Project } from '../../models/project.model';
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
+  imports: [CommonModule],
   standalone: true
 })
 export class PortfolioComponent implements OnInit {

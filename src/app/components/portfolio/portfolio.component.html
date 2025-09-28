@@ -19,7 +19,7 @@
           <div class="modal-carousel-section">
             <div class="carousel-container">
               <div class="carousel-track">
-                <img *ngFor="let slide of selectedProject.slides" [src]="slide" [alt]="selectedProject.title" class="carousel-slide">
+                <img *ngFor="let slide of selectedProject?.slides" [src]="slide" [alt]="selectedProject?.title" class="carousel-slide">
               </div>
               <div class="carousel-indicators"></div>
               <div class="carousel-nav carousel-prev" (click)="previousSlide()">
@@ -34,16 +34,16 @@
             </div>
           </div>
           <div class="modal-text-section">
-            <h3>{{ selectedProject.title }}</h3>
+            <h3>{{ selectedProject?.title }}</h3>
             <ul>
-              <li><strong>Project URL</strong>: <a [href]="selectedProject.githubUrl" target="_blank">{{ selectedProject.title }} Project</a></li>
+              <li><strong>Project URL</strong>: <a [href]="selectedProject?.githubUrl" target="_blank">{{ selectedProject?.title }} Project</a></li>
             </ul>
-            <p>{{ selectedProject.description }}</p>
+            <p>{{ selectedProject?.description }}</p>
             <p>Key highlights:</p>
             <ul>
-              <li *ngFor="let highlight of selectedProject.highlights">{{ highlight }}</li>
+              <li *ngFor="let highlight of selectedProject?.highlights">{{ highlight }}</li>
             </ul>
-            <p><strong>Impact:</strong> {{ selectedProject.impact }}</p>
+            <p><strong>Impact:</strong> {{ selectedProject?.impact }}</p>
           </div>
         </div>
       </div>
