@@ -1,1 +1,97 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --main-blue: #00aaff;
+    --main-yellow: #e6e600;
+    --yellow-glow: rgba(230, 230, 0, 0.5);
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    color: #fff;
+    scroll-behavior: smooth;
+    position: relative;
+  }
+  
+  h1, h2 {
+    color: #fff;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+  
+  p {
+    color: #ccc;
+    line-height: 1.6;
+    margin: 20px 0;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #00aaff;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e6e600;
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #00aaff #000;
+  }
+  
+  /* Section Styles */
+  .section {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 100px 20px;
+  }
+  
+  .section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
+  
+  /* Bootstrap Icons */
+  .bi {
+    display: inline-block;
+    font-family: "bootstrap-icons" !important;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal !important;
+    line-height: 1;
+    text-transform: none;
+  }
