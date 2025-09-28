@@ -12,6 +12,15 @@
     flex-direction: column;
     justify-content: center;
     text-align: left;
+    z-index: 2;
+    position: relative;
+  }
+
+  h1 {
+    color: #fff !important;
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0 0 10px 0;
   }
   
   .profile-pic-container {
@@ -34,11 +43,21 @@
   }
   
   .role-title {
-    color: #e6e600;
+    
     font-size: 1.2rem;
-    margin: 10px 0;
+    margin: 15px 0;
+    text-decoration: underline;
+    text-decoration-color: #00aaff;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 1px;
   }
   
+  p {
+    margin: 20px 0;
+    color: #fff !important;
+    line-height: 1.6;
+  }
+
   .social-links {
     display: flex;
     gap: 20px;
