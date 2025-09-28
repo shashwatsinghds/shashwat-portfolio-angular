@@ -19,9 +19,19 @@
           <div class="modal-carousel-section">
             <div class="carousel-container">
               <div class="carousel-track">
-                <img *ngFor="let slide of selectedProject?.slides" [src]="slide" [alt]="selectedProject?.title" class="carousel-slide">
+                <img *ngFor="let slide of selectedProject?.slides; let i = index" 
+                     [src]="slide" 
+                     [alt]="selectedProject?.title" 
+                     class="carousel-slide"
+                     [class.active]="i === currentSlideIndex"
+                     [style.display]="i === currentSlideIndex ? 'block' : 'none'">
               </div>
-              <div class="carousel-indicators"></div>
+              <div class="carousel-indicators">
+                <span *ngFor="let slide of selectedProject?.slides; let i = index" 
+                      class="indicator" 
+                      [class.active]="i === currentSlideIndex"
+                      (click)="goToSlide(i)"></span>
+              </div>
               <div class="carousel-nav carousel-prev" (click)="previousSlide()">
                 <i class="bi bi-chevron-left"></i>
               </div>

@@ -58,6 +58,13 @@ export class PortfolioComponent implements OnInit {
     }
   }
 
+  goToSlide(index: number): void {
+    if (this.selectedProject && index >= 0 && index < this.selectedProject.slides.length) {
+      this.currentSlideIndex = index;
+      this.stopAutoPlay();
+    }
+  }
+
   private startAutoPlay(): void {
     this.isAutoPlaying = true;
     this.autoPlayInterval = setInterval(() => {

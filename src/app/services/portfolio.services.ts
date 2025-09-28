@@ -9,14 +9,14 @@ export class PortfolioService {
     {
       id: 'focusride',
       title: 'FocusRide: AI-Driven Safety',
-      image: 'https://via.placeholder.com/400x300/00aaff/ffffff?text=FocusRide',
+      image: 'assets/images/Project 5.png',
       description: 'FocusRide is an innovative AI-powered solution designed to combat distracted driving and optimize route planning in real time. By integrating computer vision and deep learning with dynamic routing algorithms, it ensures safer and more efficient road journeys.',
       githubUrl: 'https://github.com/shashwatsinghds/focusride',
       slides: [
-        'https://via.placeholder.com/800x600/00aaff/ffffff?text=FocusRide+Slide+1',
-        'https://via.placeholder.com/800x600/e6e600/000000?text=FocusRide+Slide+2',
-        'https://via.placeholder.com/800x600/00aaff/ffffff?text=FocusRide+Slide+3',
-        'https://via.placeholder.com/800x600/e6e600/000000?text=FocusRide+Slide+4'
+        'assets/files/Projects/FocusRide/Slides/Slide1.png',
+        'assets/files/Projects/FocusRide/Slides/Slide2.png',
+        'assets/files/Projects/FocusRide/Slides/Slide3.png',
+        'assets/files/Projects/FocusRide/Slides/Slide4.png'
       ],
       highlights: [
         'Developed a distraction detection system using ResNet50 and MobileNetV2, identifying subtle signs of drowsiness, phone use, and inattention',
@@ -30,19 +30,14 @@ export class PortfolioService {
     {
       id: 'fetal-health',
       title: 'Fetal Health Diagnostics',
-      image: 'https://via.placeholder.com/400x300/e6e600/000000?text=Fetal+Health',
+      image: 'assets/images/Project 4.png',
       description: 'This project leverages machine learning to analyze cardiotocogram (CTG) data for predicting fetal health, contributing to global maternal-fetal care. It classifies conditions into normal, suspect, and pathological using real-time health signals.',
       githubUrl: 'https://github.com/shashwatsinghds/FetalHealthDiagnostics',
       slides: [
-        'https://via.placeholder.com/800x600/e6e600/000000?text=Fetal+Health+Slide+1',
-        'https://via.placeholder.com/800x600/00aaff/ffffff?text=Fetal+Health+Slide+2',
-        'https://via.placeholder.com/800x600/e6e600/000000?text=Fetal+Health+Slide+3',
-        'https://via.placeholder.com/800x600/00aaff/ffffff?text=Fetal+Health+Slide+4',
-        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide17.png',
-        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide18.png',
-        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide19.png',
-        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide20.png',
-        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide21.png'
+        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide1.png',
+        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide2.png',
+        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide3.png',
+        'assets/files/Projects/FetalHealthDiagnostics/Slides/Slide4.png'
       ],
       highlights: [
         'Utilized a dataset of 2,126+ CTG records to build supervised models for fetal health prediction',
@@ -56,13 +51,13 @@ export class PortfolioService {
     {
       id: 'medals-prediction',
       title: 'Medals Predictions Project',
-      image: 'https://via.placeholder.com/400x300/00aaff/ffffff?text=Project+1',
+      image: 'assets/images/Project 1.png',
       description: 'This project focuses on predicting the number of medals countries may win in sporting events based on historical and team-related data. Using Python and popular data science libraries like Pandas, Seaborn, and Scikit-learn, the project applies linear regression to uncover patterns and build predictive models.',
       githubUrl: 'https://github.com/shashwatsinghds/MedalsPrediction',
       slides: [
-        'assets/images/Project1_Slide1.png',
-        'assets/images/Project1_Slide2.png',
-        'assets/images/Project1_Slide3.png'
+        'https://via.placeholder.com/800x600/00aaff/ffffff?text=Medals+Prediction+Slide+1',
+        'https://via.placeholder.com/800x600/e6e600/000000?text=Medals+Prediction+Slide+2',
+        'https://via.placeholder.com/800x600/00aaff/ffffff?text=Medals+Prediction+Slide+3'
       ],
       highlights: [
         'Pulled team data from an online CSV source',
@@ -75,13 +70,13 @@ export class PortfolioService {
     {
       id: 'brain-stroke',
       title: 'Brain Stroke Prediction',
-      image: 'https://via.placeholder.com/400x300/e6e600/000000?text=Project+2',
+      image: 'assets/images/Project 2.png',
       description: 'This project aims to predict the likelihood of a stroke using patient health records. It walks through an end-to-end data science pipeline—from data cleaning and exploratory analysis to model training and evaluation—to identify high-risk individuals effectively.',
       githubUrl: 'https://github.com/shashwatsinghds/BrainStrokeAnalysis',
       slides: [
-        'assets/images/Project2_Slide1.png',
-        'assets/images/Project2_Slide2.png',
-        'assets/images/Project2_Slide3.png'
+        'https://via.placeholder.com/800x600/e6e600/000000?text=Brain+Stroke+Slide+1',
+        'https://via.placeholder.com/800x600/00aaff/ffffff?text=Brain+Stroke+Slide+2',
+        'https://via.placeholder.com/800x600/e6e600/000000?text=Brain+Stroke+Slide+3'
       ],
       highlights: [
         'Explored historical Australian weather data using pandas and visualized key features like humidity, temperature, and wind speed',
@@ -94,13 +89,13 @@ export class PortfolioService {
     {
       id: 'weather-analysis',
       title: 'Weather Analysis',
-      image: 'https://via.placeholder.com/400x300/00aaff/ffffff?text=Project+3',
+      image: 'assets/images/Project 3.png',
       description: 'This project analyzes weather data to predict whether it will rain tomorrow using a logistic regression model. It explores weather attributes such as temperature, humidity, wind speed, and rainfall history to train a binary classifier.',
       githubUrl: 'https://github.com/shashwatsinghds/AUS-WeatherAnalysis',
       slides: [
-        'assets/images/Project3_Slide1.png',
-        'assets/images/Project3_Slide2.png',
-        'assets/images/Project3_Slide3.png'
+        'https://via.placeholder.com/800x600/00aaff/ffffff?text=Weather+Analysis+Slide+1',
+        'https://via.placeholder.com/800x600/e6e600/000000?text=Weather+Analysis+Slide+2',
+        'https://via.placeholder.com/800x600/00aaff/ffffff?text=Weather+Analysis+Slide+3'
       ],
       highlights: [
         'Utilized the weatherAUS.csv dataset with historical weather data from Australian cities',
@@ -113,13 +108,13 @@ export class PortfolioService {
     {
       id: 'ai-medical-interviewing',
       title: 'AI in Medical Interviewing',
-      image: 'https://via.placeholder.com/400x300/e6e600/000000?text=Project+6',
+      image: 'assets/images/Project 6.png',
       description: 'This project explores the application of artificial intelligence in medical interviewing processes, focusing on improving patient-doctor interactions and diagnostic accuracy through AI-assisted questioning and analysis.',
       githubUrl: 'https://github.com/shashwatsinghds/ai-medical-interviewing',
       slides: [
-        'assets/images/Project6_Slide1.png',
-        'assets/images/Project6_Slide2.png',
-        'assets/images/Project6_Slide3.png'
+        'https://via.placeholder.com/800x600/e6e600/000000?text=AI+Medical+Slide+1',
+        'https://via.placeholder.com/800x600/00aaff/ffffff?text=AI+Medical+Slide+2',
+        'https://via.placeholder.com/800x600/e6e600/000000?text=AI+Medical+Slide+3'
       ],
       highlights: [
         'Developed AI-powered interview systems for medical data collection',
