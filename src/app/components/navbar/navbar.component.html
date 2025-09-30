@@ -1,26 +1,20 @@
 <nav class="navbar">
-    <a href="#home" 
-       class="nav-link" 
-       [class.active]="activeSection === 'home'"
-       (click)="navigateToSection('home')">Home</a>
-    <a href="#about" 
-       class="nav-link" 
-       [class.active]="activeSection === 'about'"
-       (click)="navigateToSection('about')">About</a>
-    <a href="#portfolio" 
-       class="nav-link" 
+   <a class="nav-link"
+   [class.active]="activeSection === 'home'"
+   (click)="navigateToSection('home')">Home</a>
+   <a class="nav-link"
+   [class.active]="activeSection === 'about'"
+   (click)="navigateToSection('about')">About</a>
+    <a class="nav-link" 
        [class.active]="activeSection === 'portfolio'"
        (click)="navigateToSection('portfolio')">Portfolio</a>
-    <a href="#career-path" 
-       class="nav-link" 
+    <a class="nav-link" 
        [class.active]="activeSection === 'career-path'"
        (click)="navigateToSection('career-path')">Career Path</a>
-    <a href="#contact" 
-       class="nav-link" 
+    <a class="nav-link" 
        [class.active]="activeSection === 'contact'"
        (click)="navigateToSection('contact')">Contact</a>
-    <a href="#downloads" 
-       class="nav-link" 
+    <a class="nav-link" 
        [class.active]="activeSection === 'downloads'"
        (click)="navigateToSection('downloads')">Downloads</a>
   </nav>
