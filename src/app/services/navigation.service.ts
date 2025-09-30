@@ -13,7 +13,8 @@ export class NavigationService {
     const element = document.getElementById(sectionId);
     if (element) {
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - this.navbarHeight;
+      const extraOffset = 20;
+      const offsetPosition = elementPosition + window.pageYOffset - (this.navbarHeight-extraOffset);
       
       window.scrollTo({
         top: offsetPosition,
