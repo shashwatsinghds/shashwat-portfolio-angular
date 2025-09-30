@@ -12,7 +12,7 @@ export class HomeComponent implements AfterViewInit {
     // Step 1: Type the name with cursor
     const nameTyped = new Typed('.name-title', {
       strings: ['Shashwat Singh'],
-      typeSpeed: 80,
+      typeSpeed: 50,
       showCursor: true,
       cursorChar: '|',
       onComplete: () => {
@@ -27,9 +27,9 @@ export class HomeComponent implements AfterViewInit {
           // Step 4: Start roles animation without cursor
           new Typed('.role-title', {
             strings: ['Software Engineer 2', 'Data Scientist', 'Machine Learning', 'GenAI'],
-            typeSpeed: 70,
-            backSpeed: 50,
-            backDelay: 1500,
+            typeSpeed: 50,
+            backSpeed: 40,
+            backDelay: 100,
             loop: true,
             showCursor: false // no cursor here
           });
