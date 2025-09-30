@@ -12,7 +12,7 @@ export class HomeComponent implements AfterViewInit {
     // Step 1: Type the name with cursor
     const nameTyped = new Typed('.name-title', {
       strings: ['Shashwat Singh'],
-      typeSpeed: 50,
+      typeSpeed: 70,
       showCursor: true,
       cursorChar: '|',
       onComplete: () => {
