@@ -5,6 +5,7 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { CareerPathComponent } from './components/careerpath/careerpath.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { DownloadsComponent } from './components/downloads/downloads.component';
+import { GithubContributionsComponent } from './components/github-contributions/github-contributions.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'career-path', component: CareerPathComponent },
+  {path: 'github-contributions', component: GithubContributionsComponent},
   { path: 'contact', component: ContactComponent },
   { path: 'downloads', component: DownloadsComponent },
   { path: '**', redirectTo: '/home' }

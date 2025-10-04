@@ -12,6 +12,9 @@
        [class.active]="activeSection === 'career-path'"
        (click)="navigateToSection('career-path')">Career Path</a>
     <a class="nav-link" 
+       [class.active]="activeSection === 'github-contributions'"
+       (click)="navigateToSection('github-contributions')">GitHub Contributions</a>
+    <a class="nav-link" 
        [class.active]="activeSection === 'contact'"
        (click)="navigateToSection('contact')">Contact</a>
     <a class="nav-link" 

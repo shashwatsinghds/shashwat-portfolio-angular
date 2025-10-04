@@ -8,6 +8,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { DownloadsComponent } from './components/downloads/downloads.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BackgroundComponent } from './components/background/background.component';
+import { GithubContributionsComponent } from './components/github-contributions/github-contributions.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ import { BackgroundComponent } from './components/background/background.componen
     ContactComponent, 
     DownloadsComponent,
     NavbarComponent, 
-    BackgroundComponent
+    BackgroundComponent,
+    GithubContributionsComponent
   ],
   standalone: true
 })
