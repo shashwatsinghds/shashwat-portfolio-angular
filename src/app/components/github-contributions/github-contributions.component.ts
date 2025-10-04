@@ -127,21 +127,52 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
         rect.setAttribute("data-date", day.date);
         rect.setAttribute("data-count", day.contributionCount.toString());
 
-        // Tooltip on hover
+        // Enhanced tooltip on hover
         rect.addEventListener("mouseenter", (e) => {
           const tooltip = document.getElementById("gh-tooltip");
           if (tooltip) {
-            tooltip.innerHTML = `${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""} on ${day.date}`;
+            const date = new Date(day.date);
+            const formattedDate = date.toLocaleDateString('en-US', { 
+              weekday: 'long', 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            });
+            
+            tooltip.innerHTML = `
+              <div style="text-align: center;">
+                <div style="font-weight: bold; margin-bottom: 4px;">${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""}</div>
+                <div style="font-size: 11px; color: #ccc;">${formattedDate}</div>
+              </div>
+            `;
             tooltip.style.display = "block";
             tooltip.style.left = (e as MouseEvent).pageX + 10 + "px";
-            tooltip.style.top = (e as MouseEvent).pageY - 30 + "px";
+            tooltip.style.top = (e as MouseEvent).pageY - 40 + "px";
           }
         });
+        
         rect.addEventListener("mouseleave", () => {
           const tooltip = document.getElementById("gh-tooltip");
           if (tooltip) {
             tooltip.style.display = "none";
           }
+        });
+
+        // Click event for more details
+        rect.addEventListener("click", (e) => {
+          const date = new Date(day.date);
+          const formattedDate = date.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          });
+          
+          alert(`📅 ${formattedDate}\n\n💻 ${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""}\n\nClick OK to view this day on GitHub!`);
+          
+          // Open GitHub profile for that specific date
+          const githubUrl = `https://github.com/${this.username}?tab=overview&from=${day.date}`;
+          window.open(githubUrl, '_blank');
         });
 
         svg.appendChild(rect);
@@ -166,9 +197,25 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     const stats = document.createElement("div");
     stats.className = "contribution-stats";
     stats.innerHTML = `
-      <p><strong>Total:</strong> ${calendar.totalContributions}</p>
-      <p><strong>Longest streak:</strong> ${longestStreak} days</p>
-      <p><strong>Current streak:</strong> ${currentStreak} days</p>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" style="color: #00aaff;">${calendar.totalContributions}</span>
+          <div class="stat-label">Total Contributions</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" style="color: #28a745;">${longestStreak}</span>
+          <div class="stat-label">Longest Streak</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" style="color: #ffc107;">${currentStreak}</span>
+          <div class="stat-label">Current Streak</div>
+        </div>
+      </div>
+      <div style="text-align: center;">
+        <a href="https://github.com/${this.username}" target="_blank" style="color: #00aaff; text-decoration: none; font-weight: 500; font-size: 16px;">
+          View Full Profile on GitHub →
+        </a>
+      </div>
     `;
     container.appendChild(stats);
 
