@@ -197,18 +197,18 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     const stats = document.createElement("div");
     stats.className = "contribution-stats";
     stats.innerHTML = `
-      <div class="stats-grid">
-        <div class="stat-item">
-          <span class="stat-number" style="color: #00aaff;">${calendar.totalContributions}</span>
-          <div class="stat-label">Total Contributions</div>
+      <div class="stats-grid" style="display: flex; justify-content: space-between; align-items: center; gap: 30px; margin-bottom: 15px; flex-direction: row; width: 100%;">
+        <div class="stat-item" style="flex: 1; text-align: center; padding: 20px 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; backdrop-filter: blur(10px); min-width: 120px; max-width: 200px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
+          <span class="stat-number" style="color: #00aaff; font-size: 32px; font-weight: bold; margin-bottom: 8px; display: block; text-shadow: 0 0 10px rgba(0,170,255,0.3);">${calendar.totalContributions}</span>
+          <div class="stat-label" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Total Contributions</div>
         </div>
-        <div class="stat-item">
-          <span class="stat-number" style="color: #28a745;">${longestStreak}</span>
-          <div class="stat-label">Longest Streak</div>
+        <div class="stat-item" style="flex: 1; text-align: center; padding: 20px 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; backdrop-filter: blur(10px); min-width: 120px; max-width: 200px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
+          <span class="stat-number" style="color: #28a745; font-size: 32px; font-weight: bold; margin-bottom: 8px; display: block; text-shadow: 0 0 10px rgba(40,167,69,0.3);">${longestStreak}</span>
+          <div class="stat-label" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Longest Streak</div>
         </div>
-        <div class="stat-item">
-          <span class="stat-number" style="color: #ffc107;">${currentStreak}</span>
-          <div class="stat-label">Current Streak</div>
+        <div class="stat-item" style="flex: 1; text-align: center; padding: 20px 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; backdrop-filter: blur(10px); min-width: 120px; max-width: 200px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
+          <span class="stat-number" style="color: #ffc107; font-size: 32px; font-weight: bold; margin-bottom: 8px; display: block; text-shadow: 0 0 10px rgba(255,193,7,0.3);">${currentStreak}</span>
+          <div class="stat-label" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Current Streak</div>
         </div>
       </div>
       <div style="text-align: center;">
