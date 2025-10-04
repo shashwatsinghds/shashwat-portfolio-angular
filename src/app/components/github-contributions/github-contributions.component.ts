@@ -103,8 +103,8 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
       return;
     }
     
-    const cellSize = 12;
-    const cellGap = 2;
+    const cellSize = 20;
+    const cellGap = 4;
     const weeks = calendar.weeks;
     
     if (!weeks || weeks.length === 0) {

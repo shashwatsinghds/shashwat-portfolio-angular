@@ -5,6 +5,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
   .github-contributions-section h2 {
@@ -14,13 +17,21 @@
   }
 
   #ghcal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin: 20px 0;
-    max-width: 100%;
-    overflow-x: auto;
+    width: 100%;
   }
 
   #ghcal svg {
-    border-radius: 6px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #f8f9fa;
+    padding: 15px;
+    min-width: 800px;
+    min-height: 200px;
   }
 
   .tooltip {
@@ -39,14 +50,30 @@
     margin-top: 20px;
     text-align: center;
     color: #666;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .contribution-stats p {
-    margin: 5px 0;
-    font-size: 14px;
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: 500;
   }
 
   .contribution-stats strong {
     color: #00aaff;
+    font-size: 18px;
+  }
+
+  #ghcal svg rect {
+    transition: all 0.2s ease;
+  }
+
+  #ghcal svg rect:hover {
+    stroke: #00aaff;
+    stroke-width: 2;
+    transform: scale(1.1);
   }
   
