@@ -127,50 +127,71 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
         rect.setAttribute("data-date", day.date);
         rect.setAttribute("data-count", day.contributionCount.toString());
 
-        // Enhanced tooltip on hover
+        // Simple tooltip using title attribute as fallback
+        const date = new Date(day.date);
+        const formattedDate = date.toLocaleDateString('en-US', { 
+          weekday: 'long', 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        });
+        
+        rect.setAttribute('title', `📅 ${formattedDate}\n💻 ${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""}\nClick to view on GitHub`);
+
+        // Enhanced tooltip on hover with detailed info
         rect.addEventListener("mouseenter", (e) => {
-          const tooltip = document.getElementById("gh-tooltip");
-          if (tooltip) {
-            const date = new Date(day.date);
-            const formattedDate = date.toLocaleDateString('en-US', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            });
-            
-            tooltip.innerHTML = `
-              <div style="text-align: center;">
-                <div style="font-weight: bold; margin-bottom: 4px;">${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""}</div>
-                <div style="font-size: 11px; color: #ccc;">${formattedDate}</div>
-              </div>
-            `;
-            tooltip.style.display = "block";
-            tooltip.style.left = (e as MouseEvent).pageX + 10 + "px";
-            tooltip.style.top = (e as MouseEvent).pageY - 40 + "px";
+          // Remove any existing tooltip
+          const existingTooltip = document.getElementById("gh-tooltip");
+          if (existingTooltip) {
+            existingTooltip.remove();
           }
+          
+          // Create new tooltip
+          const tooltip = document.createElement("div");
+          tooltip.id = "gh-tooltip";
+          tooltip.style.cssText = `
+            position: fixed;
+            background: rgba(0, 0, 0, 0.95);
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            pointer-events: none;
+            z-index: 999999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 2px solid #00aaff;
+            max-width: 300px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            backdrop-filter: blur(10px);
+            left: ${(e as MouseEvent).clientX + 15}px;
+            top: ${(e as MouseEvent).clientY - 60}px;
+          `;
+          
+          tooltip.innerHTML = `
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 8px; color: #fff;">
+              📅 ${formattedDate}
+            </div>
+            <div style="font-size: 20px; font-weight: bold; margin-bottom: 6px; color: #00aaff;">
+              💻 ${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""}
+            </div>
+            <div style="font-size: 12px; color: #ccc; margin-top: 6px;">
+              Click to view on GitHub
+            </div>
+          `;
+          
+          document.body.appendChild(tooltip);
         });
         
         rect.addEventListener("mouseleave", () => {
           const tooltip = document.getElementById("gh-tooltip");
           if (tooltip) {
-            tooltip.style.display = "none";
+            tooltip.remove();
           }
         });
 
-        // Click event for more details
+        // Click event to open GitHub
         rect.addEventListener("click", (e) => {
-          const date = new Date(day.date);
-          const formattedDate = date.toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          });
-          
-          alert(`📅 ${formattedDate}\n\n💻 ${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""}\n\nClick OK to view this day on GitHub!`);
-          
-          // Open GitHub profile for that specific date
           const githubUrl = `https://github.com/${this.username}?tab=overview&from=${day.date}`;
           window.open(githubUrl, '_blank');
         });
