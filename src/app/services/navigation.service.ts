@@ -24,7 +24,7 @@ export class NavigationService {
   }
 
   getActiveSection(): string {
-    const sections = ['home', 'about', 'portfolio', 'career-path', 'contact', 'downloads'];
+    const sections = ['home', 'about', 'portfolio', 'career-path', 'github-contributions', 'contact', 'downloads'];
     let currentSection = 'home';
 
     sections.forEach(section => {

@@ -27,7 +27,10 @@ export class NavbarComponent implements OnInit {
     
     // Trigger GitHub contributions refresh when that section is clicked
     if (section === 'github-contributions') {
-      this.refreshGitHubContributions();
+      // Add a small delay to ensure scroll completes before refresh
+      setTimeout(() => {
+        this.refreshGitHubContributions();
+      }, 500);
     }
   }
 
@@ -35,5 +38,10 @@ export class NavbarComponent implements OnInit {
     // Dispatch a custom event to trigger refresh
     const refreshEvent = new CustomEvent('refreshGitHubContributions');
     window.dispatchEvent(refreshEvent);
+    
+    // Ensure active section is maintained after refresh
+    setTimeout(() => {
+      this.activeSection = this.navigationService.getActiveSection();
+    }, 1000);
   }
 }
