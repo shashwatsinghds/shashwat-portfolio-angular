@@ -24,5 +24,16 @@ export class NavbarComponent implements OnInit {
   navigateToSection(section: string): void {
     this.navigationService.scrollToSection(section);
     this.activeSection = section;
+    
+    // Trigger GitHub contributions refresh when that section is clicked
+    if (section === 'github-contributions') {
+      this.refreshGitHubContributions();
+    }
+  }
+
+  private refreshGitHubContributions(): void {
+    // Dispatch a custom event to trigger refresh
+    const refreshEvent = new CustomEvent('refreshGitHubContributions');
+    window.dispatchEvent(refreshEvent);
   }
 }

@@ -99,6 +99,12 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     console.log('GitHub Contributions Component initialized');
     // Make refresh method available globally for debugging
     (window as any).refreshGitHubContributions = () => this.refreshContributions();
+    
+    // Listen for refresh events from navbar
+    window.addEventListener('refreshGitHubContributions', () => {
+      console.log('Refresh event received from navbar');
+      this.refreshContributions();
+    });
   }
 
   ngAfterViewInit() {
@@ -447,6 +453,18 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     `;
     container.appendChild(stats);
 
+    // Animate the numbers with dial effect
+    setTimeout(() => {
+      const statNumbers = container.querySelectorAll('.stat-number');
+      statNumbers.forEach((element, index) => {
+        const targetValue = parseInt(element.textContent || '0');
+        if (targetValue > 0) {
+          element.textContent = '0';
+          this.animateNumber(element as HTMLElement, targetValue, 1200 + (index * 200));
+        }
+      });
+    }, 100);
+
     // Make SVG responsive
     requestAnimationFrame(() => {
       const svgElement = container.querySelector("svg");
@@ -510,7 +528,54 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     if (existingWrapper) {
       existingWrapper.remove();
     }
+    
+    // Show loading animation
+    this.showLoadingAnimation();
+    
     this.loadContributions();
+  }
+
+  private showLoadingAnimation(): void {
+    const container = this.ghcalRef?.nativeElement || document.getElementById('ghcal');
+    if (container) {
+      container.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; color: #00aaff;">
+          <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #00aaff; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;"></div>
+          <p style="font-size: 16px; margin: 0;">Refreshing GitHub contributions...</p>
+        </div>
+        <style>
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        </style>
+      `;
+    }
+  }
+
+  // Dial animation for numbers
+  private animateNumber(element: HTMLElement, targetValue: number, duration: number = 1000): void {
+    const startValue = 0;
+    const startTime = performance.now();
+    
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOutCubic);
+      
+      element.textContent = currentValue.toString();
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        element.textContent = targetValue.toString();
+      }
+    };
+    
+    requestAnimationFrame(animate);
   }
 
 }
