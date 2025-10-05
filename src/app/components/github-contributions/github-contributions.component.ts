@@ -5,15 +5,82 @@ interface ContributionDay {
   date: string;
   contributionCount: number;
   color: string;
+  weekday: number;
 }
 
 interface Week {
   contributionDays: ContributionDay[];
 }
 
+interface Repository {
+  name: string;
+  owner: { login: string };
+  url: string;
+  stargazerCount: number;
+  primaryLanguage: { name: string } | null;
+}
+
+interface RepositoryContribution {
+  repository: Repository;
+  contributions: { totalCount: number };
+}
+
 interface ContributionCalendar {
   totalContributions: number;
   weeks: Week[];
+  totalCommitContributions: number;
+  totalIssueContributions: number;
+  totalPullRequestContributions: number;
+  totalPullRequestReviewContributions: number;
+  totalRepositoryContributions: number;
+  totalRepositoriesWithContributedCommits: number;
+  totalRepositoriesWithContributedIssues: number;
+  totalRepositoriesWithContributedPullRequests: number;
+  totalRepositoriesWithContributedPullRequestReviews: number;
+  commitContributionsByRepository: RepositoryContribution[];
+}
+
+interface UserProfile {
+  login: string;
+  name: string;
+  bio: string;
+  avatarUrl: string;
+  location: string;
+  websiteUrl: string;
+  company: string;
+  followers: { totalCount: number };
+  following: { totalCount: number };
+  repositories: { totalCount: number };
+  starredRepositories: { totalCount: number };
+  createdAt: string;
+}
+
+interface GitHubData {
+  contributionsCollection: {
+    contributionCalendar: ContributionCalendar;
+    totalCommitContributions: number;
+    totalIssueContributions: number;
+    totalPullRequestContributions: number;
+    totalPullRequestReviewContributions: number;
+    totalRepositoryContributions: number;
+    totalRepositoriesWithContributedCommits: number;
+    totalRepositoriesWithContributedIssues: number;
+    totalRepositoriesWithContributedPullRequests: number;
+    totalRepositoriesWithContributedPullRequestReviews: number;
+    commitContributionsByRepository: RepositoryContribution[];
+  };
+  login: string;
+  name: string;
+  bio: string;
+  avatarUrl: string;
+  location: string;
+  websiteUrl: string;
+  company: string;
+  followers: { totalCount: number };
+  following: { totalCount: number };
+  repositories: { totalCount: number };
+  starredRepositories: { totalCount: number };
+  createdAt: string;
 }
 
 @Component({
@@ -30,6 +97,8 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     console.log('GitHub Contributions Component initialized');
+    // Make refresh method available globally for debugging
+    (window as any).refreshGitHubContributions = () => this.refreshContributions();
   }
 
   ngAfterViewInit() {
@@ -43,16 +112,34 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
   async loadContributions() {
     try {
       console.log('Loading GitHub contributions...');
-      const calendar = await this.fetchContributions(this.username, this.token);
-      console.log('Calendar data received:', calendar);
-      this.renderHeatmap(calendar);
+      const userData = await this.fetchContributions(this.username, this.token);
+      console.log('GitHub data received:', userData);
+      
+      // Extract the calendar and user data correctly
+      const calendar = userData.contributionsCollection?.contributionCalendar;
+      const user = {
+        login: userData.login,
+        name: userData.name,
+        bio: userData.bio,
+        avatarUrl: userData.avatarUrl,
+        location: userData.location,
+        websiteUrl: userData.websiteUrl,
+        company: userData.company,
+        followers: userData.followers,
+        following: userData.following,
+        repositories: userData.repositories,
+        starredRepositories: userData.starredRepositories,
+        createdAt: userData.createdAt
+      };
+      
+      this.renderHeatmap(calendar, user, userData.contributionsCollection);
     } catch (error) {
       console.error('Error loading GitHub contributions:', error);
       this.showError('Failed to load GitHub contributions. Check console for details.');
     }
   }
 
-  private async fetchContributions(username: string, token: string): Promise<ContributionCalendar> {
+  private async fetchContributions(username: string, token: string): Promise<GitHubData> {
     const query = `
       query($login: String!) {
         user(login: $login) {
@@ -64,10 +151,42 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
                   date
                   contributionCount
                   color
+                  weekday
                 }
               }
             }
+            totalCommitContributions
+            totalIssueContributions
+            totalPullRequestContributions
+            totalPullRequestReviewContributions
+            totalRepositoryContributions
+            totalRepositoriesWithContributedCommits
+            totalRepositoriesWithContributedIssues
+            totalRepositoriesWithContributedPullRequests
+            totalRepositoriesWithContributedPullRequestReviews
+            commitContributionsByRepository(maxRepositories: 5) {
+              repository {
+                name
+                owner { login }
+                url
+                stargazerCount
+                primaryLanguage { name }
+              }
+              contributions { totalCount }
+            }
           }
+          login
+          name
+          bio
+          avatarUrl
+          location
+          websiteUrl
+          company
+          followers { totalCount }
+          following { totalCount }
+          repositories { totalCount }
+          starredRepositories { totalCount }
+          createdAt
         }
       }
     `;
@@ -82,11 +201,41 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     });
 
     const json = await res.json();
-    return json.data.user.contributionsCollection.contributionCalendar;
+    console.log('Full API response:', json);
+
+    if (json.errors) {
+      console.error('GitHub API errors:', json.errors);
+      throw new Error(`GitHub API Error: ${json.errors[0].message}`);
+    }
+
+    if (!json.data || !json.data.user) {
+      throw new Error('No user data received from GitHub API');
+    }
+    
+    // Log the structure to understand what we're getting
+    console.log('User data structure:', json.data.user);
+    console.log('Contributions collection:', json.data.user.contributionsCollection);
+    
+    return json.data.user;
   }
 
-  private renderHeatmap(calendar: ContributionCalendar) {
+  private renderHeatmap(calendar: ContributionCalendar, user: UserProfile, contributionsCollection: any) {
     console.log('Rendering heatmap with calendar:', calendar);
+    console.log('User profile:', user);
+    
+    // Validate calendar data
+    if (!calendar || !calendar.weeks) {
+      console.error('Invalid calendar data:', calendar);
+      this.showError('Invalid contribution data received from GitHub');
+      return;
+    }
+    
+    // Check if content already exists to prevent re-rendering
+    const existingWrapper = document.getElementById('github-contributions-wrapper');
+    if (existingWrapper) {
+      console.log('GitHub contributions already rendered, skipping...');
+      return;
+    }
     
     // Try ViewChild first, then fallback to getElementById
     let container: HTMLElement | null = null;
@@ -109,6 +258,7 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     
     if (!weeks || weeks.length === 0) {
       console.error('No weeks data available');
+      this.showError('No contribution data available for this period');
       return;
     }
 
@@ -207,8 +357,16 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
       });
     });
 
+    // Clear existing content but preserve structure
     container.innerHTML = "";
-    container.appendChild(svg);
+    
+    // Add a wrapper div to protect the content from being overwritten
+    const wrapper = document.createElement("div");
+    wrapper.id = "github-contributions-wrapper";
+    wrapper.style.cssText = "width: 100%; height: 100%; position: relative;";
+    
+    wrapper.appendChild(svg);
+    container.appendChild(wrapper);
 
     // Stats
     let currentStreak = 0, longestStreak = 0, temp = 0;
@@ -225,7 +383,8 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     const stats = document.createElement("div");
     stats.className = "contribution-stats";
     stats.innerHTML = `
-      <div class="stats-grid" style="display: flex; justify-content: space-between; align-items: center; gap: 30px; margin-bottom: 15px; flex-direction: row; width: 100%;">
+      <!-- Main Stats Row -->
+      <div class="stats-grid" style="display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 20px; flex-direction: row; width: 100%;">
         <div class="stat-item" style="flex: 1; text-align: center; padding: 0; background: transparent; border: none; min-width: 120px; max-width: 200px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
           <span class="stat-number" style="color: #00aaff; font-size: 32px; font-weight: bold; margin-bottom: 8px; display: block; text-shadow: 0 0 10px rgba(0,170,255,0.3);">${calendar.totalContributions}</span>
           <div class="stat-label" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Total Contributions</div>
@@ -239,6 +398,47 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
           <div class="stat-label" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Current Streak</div>
         </div>
       </div>
+
+      <!-- Detailed Stats Row -->
+      <div class="stats-grid" style="display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 20px; flex-direction: row; width: 100%; flex-wrap: wrap;">
+        <div class="stat-item" style="flex: 1; text-align: center; padding: 0; background: transparent; border: none; min-width: 100px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
+          <span class="stat-number" style="color: #e74c3c; font-size: 24px; font-weight: bold; margin-bottom: 4px; display: block; text-shadow: 0 0 8px rgba(231,76,60,0.3);">${contributionsCollection?.totalCommitContributions || 0}</span>
+          <div class="stat-label" style="font-size: 12px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Commits</div>
+        </div>
+        <div class="stat-item" style="flex: 1; text-align: center; padding: 0; background: transparent; border: none; min-width: 100px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
+          <span class="stat-number" style="color: #9b59b6; font-size: 24px; font-weight: bold; margin-bottom: 4px; display: block; text-shadow: 0 0 8px rgba(155,89,182,0.3);">${contributionsCollection?.totalPullRequestContributions || 0}</span>
+          <div class="stat-label" style="font-size: 12px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Pull Requests</div>
+        </div>
+        <div class="stat-item" style="flex: 1; text-align: center; padding: 0; background: transparent; border: none; min-width: 100px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
+          <span class="stat-number" style="color: #f39c12; font-size: 24px; font-weight: bold; margin-bottom: 4px; display: block; text-shadow: 0 0 8px rgba(243,156,18,0.3);">${contributionsCollection?.totalIssueContributions || 0}</span>
+          <div class="stat-label" style="font-size: 12px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Issues</div>
+        </div>
+        <div class="stat-item" style="flex: 1; text-align: center; padding: 0; background: transparent; border: none; min-width: 100px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
+          <span class="stat-number" style="color: #1abc9c; font-size: 24px; font-weight: bold; margin-bottom: 4px; display: block; text-shadow: 0 0 8px rgba(26,188,156,0.3);">${contributionsCollection?.totalRepositoriesWithContributedCommits || 0}</span>
+          <div class="stat-label" style="font-size: 12px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Repositories</div>
+        </div>
+      </div>
+
+      <!-- Profile Info -->
+      ${user ? `
+      <div style="text-align: center; margin-bottom: 15px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px;">
+          <img src="${user.avatarUrl}" alt="${user.login}" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #00aaff;">
+          <div style="text-align: left;">
+            <div style="font-size: 18px; font-weight: bold; color: #fff; margin-bottom: 4px;">${user.name || user.login}</div>
+            <div style="font-size: 14px; color: #00aaff; margin-bottom: 2px;">@${user.login}</div>
+            ${user.location ? `<div style="font-size: 12px; color: #ccc;">📍 ${user.location}</div>` : ''}
+          </div>
+        </div>
+        ${user.bio ? `<div style="font-size: 14px; color: #ccc; margin-bottom: 10px; font-style: italic;">"${user.bio}"</div>` : ''}
+        <div style="display: flex; justify-content: center; gap: 20px; font-size: 12px; color: #ccc;">
+          <span>👥 ${user.followers?.totalCount || 0} followers</span>
+          <span>⭐ ${user.starredRepositories?.totalCount || 0} stars</span>
+          <span>📁 ${user.repositories?.totalCount || 0} repos</span>
+        </div>
+      </div>
+      ` : ''}
+
       <div style="text-align: center;">
         <a href="https://github.com/${this.username}" target="_blank" style="color: #00aaff; text-decoration: none; font-weight: 500; font-size: 16px;">
           View Full Profile on GitHub →
@@ -260,6 +460,31 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
         }
       }
     });
+
+    // Set up a MutationObserver to detect if content gets removed
+    this.setupContentProtection(container);
+  }
+
+  private setupContentProtection(container: HTMLElement) {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          const wrapper = document.getElementById('github-contributions-wrapper');
+          if (!wrapper && container.children.length === 0) {
+            console.log('GitHub contributions content was removed, restoring...');
+            // Restore the content after a short delay
+            setTimeout(() => {
+              this.refreshContributions();
+            }, 100);
+          }
+        }
+      });
+    });
+
+    observer.observe(container, {
+      childList: true,
+      subtree: true
+    });
   }
 
   private showError(message: string) {
@@ -277,4 +502,15 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     }
     container.innerHTML = `<p style="color: red;">${message}</p>`;
   }
+
+  // Public method to refresh the contributions if they disappear
+  public refreshContributions() {
+    console.log('Refreshing GitHub contributions...');
+    const existingWrapper = document.getElementById('github-contributions-wrapper');
+    if (existingWrapper) {
+      existingWrapper.remove();
+    }
+    this.loadContributions();
+  }
+
 }
