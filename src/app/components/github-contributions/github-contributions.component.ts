@@ -128,13 +128,20 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
         rect.setAttribute("data-count", day.contributionCount.toString());
 
         // Simple tooltip using title attribute as fallback
-        const date = new Date(day.date);
-        const formattedDate = date.toLocaleDateString('en-US', { 
-          weekday: 'long', 
-          year: 'numeric', 
-          month: 'long', 
-          day: 'numeric' 
-        });
+        // Fix timezone issue by parsing the date correctly
+        const parseDate = (dateString: string) => {
+          // GitHub returns dates in YYYY-MM-DD format
+          // Add time component to avoid timezone issues
+          const date = new Date(dateString + 'T12:00:00');
+          return date.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          });
+        };
+        
+        const formattedDate = parseDate(day.date);
         
         rect.setAttribute('title', `📅 ${formattedDate}\n💻 ${day.contributionCount} contribution${day.contributionCount !== 1 ? "s" : ""}\nClick to view on GitHub`);
 
