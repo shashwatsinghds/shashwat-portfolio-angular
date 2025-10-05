@@ -437,11 +437,11 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
           </div>
         </div>
         ${user.bio ? `<div style="font-size: 14px; color: #ccc; margin-bottom: 10px; font-style: italic;">"${user.bio}"</div>` : ''}
-        <div style="display: flex; justify-content: center; gap: 20px; font-size: 12px; color: #ccc;">
-          <span>👥 ${user.followers?.totalCount || 0} followers</span>
-          <span>⭐ ${user.starredRepositories?.totalCount || 0} stars</span>
-          <span>📁 ${user.repositories?.totalCount || 0} repos</span>
-        </div>
+            <div style="display: flex; justify-content: center; gap: 20px; font-size: 12px; color: #ccc;">
+              <!-- <span>👥 ${user.followers?.totalCount || 0} followers</span>
+              <span>⭐ ${user.starredRepositories?.totalCount || 0} stars</span>
+              <span>📁 ${user.repositories?.totalCount || 0} repos</span> -->
+            </div>
       </div>
       ` : ''}
 
@@ -528,29 +528,7 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
     if (existingWrapper) {
       existingWrapper.remove();
     }
-    
-    // Show loading animation
-    this.showLoadingAnimation();
-    
     this.loadContributions();
-  }
-
-  private showLoadingAnimation(): void {
-    const container = this.ghcalRef?.nativeElement || document.getElementById('ghcal');
-    if (container) {
-      container.innerHTML = `
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; color: #00aaff;">
-          <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #00aaff; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;"></div>
-          <p style="font-size: 16px; margin: 0;">Refreshing GitHub contributions...</p>
-        </div>
-        <style>
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        </style>
-      `;
-    }
   }
 
   // Dial animation for numbers
