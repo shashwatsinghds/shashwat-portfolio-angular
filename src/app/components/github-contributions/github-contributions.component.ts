@@ -420,7 +420,7 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
           <div class="stat-label" style="font-size: 12px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Issues</div>
         </div>
         <div class="stat-item" style="flex: 1; text-align: center; padding: 0; background: transparent; border: none; min-width: 100px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s ease;">
-          <span class="stat-number" style="color: #1abc9c; font-size: 24px; font-weight: bold; margin-bottom: 4px; display: block; text-shadow: 0 0 8px rgba(26,188,156,0.3);">${contributionsCollection?.totalRepositoriesWithContributedCommits || 0}</span>
+          <span class="stat-number" style="color: #1abc9c; font-size: 24px; font-weight: bold; margin-bottom: 4px; display: block; text-shadow: 0 0 8px rgba(26,188,156,0.3);">${user?.repositories?.totalCount || 0}</span>
           <div class="stat-label" style="font-size: 12px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Repositories</div>
         </div>
       </div>
