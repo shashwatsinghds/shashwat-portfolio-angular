@@ -19,18 +19,19 @@
   }
   
   .contact-item {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.3);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
     border: 1px solid transparent;
     transition: all 0.3s ease;
+    border: 1px solid #e6e600;
   }
   
   .contact-item:hover {
     transform: translateY(-8px);
-    box-shadow: 0 8px 32px rgba(0, 170, 255, 0.3);
-    border: 1px solid #e6e600;
+    box-shadow: 0 8px 32px rgba(0, 170, 255, 0.5);
+    
   }
   
   .contact-icon {
