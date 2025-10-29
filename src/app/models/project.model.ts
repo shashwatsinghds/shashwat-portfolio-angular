@@ -7,4 +7,6 @@ export interface Project {
   slides: string[];
   highlights: string[];
   impact: string;
+  category: 'all' | 'ml-ai' | 'software' | 'full-stack';
+  tags?: string[];
 }

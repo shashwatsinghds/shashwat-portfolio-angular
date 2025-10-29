@@ -11,16 +11,28 @@ import { Project } from '../../models/project.model';
   standalone: true
 })
 export class PortfolioComponent implements OnInit {
+  allProjects: Project[] = [];
   projects: Project[] = [];
   selectedProject: Project | null = null;
   currentSlideIndex = 0;
   isAutoPlaying = true;
   autoPlayInterval: any;
+  activeFilter: 'all' | 'ml-ai' | 'software' | 'full-stack' = 'all';
 
   constructor(private portfolioService: PortfolioService) {}
 
   ngOnInit(): void {
-    this.projects = this.portfolioService.getProjects();
+    this.allProjects = this.portfolioService.getProjects();
+    this.projects = this.allProjects;
+  }
+
+  filterProjects(category: 'all' | 'ml-ai' | 'software' | 'full-stack'): void {
+    this.activeFilter = category;
+    if (category === 'all') {
+      this.projects = this.allProjects;
+    } else {
+      this.projects = this.allProjects.filter(project => project.category === category);
+    }
   }
 
   openModal(project: Project): void {

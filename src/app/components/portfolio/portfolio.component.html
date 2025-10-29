@@ -1,5 +1,34 @@
 <section id="portfolio" class="section portfolio-section">
     <h2>Portfolio</h2>
+    
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button 
+        class="filter-btn" 
+        [class.active]="activeFilter === 'all'"
+        (click)="filterProjects('all')">
+        <i class="bi bi-grid-3x3-gap"></i> All Projects
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="activeFilter === 'ml-ai'"
+        (click)="filterProjects('ml-ai')">
+        <i class="bi bi-cpu"></i> ML/AI
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="activeFilter === 'software'"
+        (click)="filterProjects('software')">
+        <i class="bi bi-code-slash"></i> Software
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="activeFilter === 'full-stack'"
+        (click)="filterProjects('full-stack')">
+        <i class="bi bi-layers"></i> Full Stack
+      </button>
+    </div>
+
     <div class="portfolio-container">
       <div class="portfolio-item" *ngFor="let project of projects" (click)="openModal(project)">
         <div class="portfolio-image-wrapper">
