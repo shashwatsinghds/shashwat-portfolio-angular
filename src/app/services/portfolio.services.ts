@@ -25,7 +25,9 @@ export class PortfolioService {
         'Implemented a predicate logic-based intervention system to trigger alerts or reroute drivers when high-risk behavior is detected',
         'Built a modular, secure, and accessible architecture ensuring robust performance, privacy, and ease of use'
       ],
-      impact: 'FocusRide pushes the frontier of AI in transportation by merging driver behavior analysis with proactive navigation. The system aims to reduce accident rates and congestion while prioritizing driver well-being.'
+      impact: 'FocusRide pushes the frontier of AI in transportation by merging driver behavior analysis with proactive navigation. The system aims to reduce accident rates and congestion while prioritizing driver well-being.',
+      category: 'ml-ai',
+      tags: ['Computer Vision', 'Deep Learning', 'Python', 'AI', 'ResNet50', 'MobileNetV2']
     },
     {
       id: 'fetal-health',
@@ -46,7 +48,9 @@ export class PortfolioService {
         'Conducted statistical evaluation with ANOVA F-statistics to identify top predictive features like prolonged decelerations and abnormal short-term variability',
         'Validated findings through 5-fold cross-validation and precision-recall metrics, emphasizing public health safety'
       ],
-      impact: 'By combining historical CTG data with cutting-edge AI models, this project offers a scalable, cost-effective approach to reduce preventable fetal distress. It underscores the role of machine learning in delivering accessible, proactive maternal healthcare.'
+      impact: 'By combining historical CTG data with cutting-edge AI models, this project offers a scalable, cost-effective approach to reduce preventable fetal distress. It underscores the role of machine learning in delivering accessible, proactive maternal healthcare.',
+      category: 'ml-ai',
+      tags: ['Machine Learning', 'Random Forest', 'XGBoost', 'Python', 'Healthcare AI', 'Data Science']
     },
     {
       id: 'medals-prediction',
@@ -65,7 +69,9 @@ export class PortfolioService {
         'Trained a regression model to predict medal outcomes',
         'Evaluated model accuracy using metrics like RMSE and R²'
       ],
-      impact: 'This project demonstrates the application of machine learning in sports analytics, providing insights into athletic performance patterns and medal prediction capabilities.'
+      impact: 'This project demonstrates the application of machine learning in sports analytics, providing insights into athletic performance patterns and medal prediction capabilities.',
+      category: 'ml-ai',
+      tags: ['Machine Learning', 'Python', 'Linear Regression', 'Data Analysis', 'Scikit-learn']
     },
     {
       id: 'brain-stroke',
@@ -84,7 +90,9 @@ export class PortfolioService {
         'Trained a Logistic Regression model to predict if it will rain tomorrow',
         'Achieved 83.05% accuracy while also highlighting the impact of class imbalance in predictions'
       ],
-      impact: 'This project showcases the power of machine learning in healthcare, providing a tool for early stroke risk assessment and prevention.'
+      impact: 'This project showcases the power of machine learning in healthcare, providing a tool for early stroke risk assessment and prevention.',
+      category: 'ml-ai',
+      tags: ['Machine Learning', 'Healthcare AI', 'Python', 'Data Science', 'Logistic Regression']
     },
     {
       id: 'weather-analysis',
@@ -103,7 +111,9 @@ export class PortfolioService {
         'Trained a Logistic Regression model to predict if it will rain tomorrow',
         'Achieved 83.05% accuracy, noting the impact of class imbalance on prediction results'
       ],
-      impact: 'This project demonstrates practical applications of machine learning in meteorology, providing accurate weather prediction capabilities for agricultural and planning purposes.'
+      impact: 'This project demonstrates practical applications of machine learning in meteorology, providing accurate weather prediction capabilities for agricultural and planning purposes.',
+      category: 'ml-ai',
+      tags: ['Machine Learning', 'Data Science', 'Python', 'Pandas', 'Logistic Regression']
     },
     {
       id: 'ai-medical-interviewing',
@@ -122,7 +132,9 @@ export class PortfolioService {
         'Created intelligent questioning algorithms based on patient responses',
         'Integrated machine learning models for diagnostic assistance'
       ],
-      impact: 'This project revolutionizes medical interviewing by leveraging AI to improve diagnostic accuracy, patient care quality, and healthcare efficiency.'
+      impact: 'This project revolutionizes medical interviewing by leveraging AI to improve diagnostic accuracy, patient care quality, and healthcare efficiency.',
+      category: 'ml-ai',
+      tags: ['AI', 'NLP', 'Healthcare AI', 'Machine Learning', 'Python']
     }
   ];
 
