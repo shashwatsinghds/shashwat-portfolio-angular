@@ -135,6 +135,29 @@ export class PortfolioService {
       impact: 'This project revolutionizes medical interviewing by leveraging AI to improve diagnostic accuracy, patient care quality, and healthcare efficiency.',
       category: 'ml-ai',
       tags: ['AI', 'NLP', 'Healthcare AI', 'Machine Learning', 'Python']
+    },
+    {
+      id: 'portfolio-plus',
+      title: 'Portfolio Plus: Simulated Portfolio',
+      image: 'assets/images/Project 5.png',
+      description: 'Portfolio+ is a virtual stock trading platform where users can manage their investments, track stock performance using real-world data, and compete with others on leaderboards. The project is built for learning and simulation purposes, allowing users to explore stock market trends without financial risk.',
+      githubUrl: 'https://github.com/Portfolio-Simulation/PortfolioPlus',
+      slides: [
+        'assets/files/Projects/FocusRide/Slides/Slide1.png',
+        'assets/files/Projects/FocusRide/Slides/Slide2.png',
+        'assets/files/Projects/FocusRide/Slides/Slide3.png',
+        'assets/files/Projects/FocusRide/Slides/Slide4.png'
+      ],
+      highlights: [
+        'User and Admin Logins: Users create accounts and manage portfolios, while admins monitor platform activities and generate reports.',
+        'Implemented real-time stock data fetching from Yahoo Finance API',
+        'Created a user-friendly interface for portfolio management and performance tracking',
+        'Added leaderboard functionality to encourage competition and learning',
+        'Developed a virtual stock trading platform using Python and popular libraries like Pandas, NumPy, and Matplotlib'
+      ],
+      impact: 'Portfolio+ provides a safe and educational environment for users to learn about stock market dynamics and investment strategies without financial risk.',
+      category: 'software',
+      tags: ['Software Development', 'Python', 'Flask']
     }
   ];
 
