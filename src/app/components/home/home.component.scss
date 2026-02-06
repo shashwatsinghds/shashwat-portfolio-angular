@@ -45,18 +45,11 @@
   .role-title {
     font-size: 1.2rem;
     margin: 15px 0;
-    text-decoration: underline;
-    text-decoration-color: #00aaff;
     text-underline-offset: 8px;
     text-decoration-thickness: 1px;
     animation: underlinePulse 2s infinite;
   }
   
-  @keyframes underlinePulse {
-    0%, 100% { text-decoration-color: #00aaff; }
-    50% { text-decoration-color: #e6e600; }
-  }
-
   p {
     margin: 20px 0;
     color: #fff !important;
