@@ -24,15 +24,15 @@ export class HomeComponent implements AfterViewInit {
             cursor.remove();
           }
 
-          // Step 4: Start roles animation without cursor
+          
           new Typed('.role-title', {
-            strings: ['Software Engineer 2 | Data Scientist | Machine Learning | GenAI'],
+            strings: ['Software Engineer 2 | GenAI | RAG with LLMs'],
             typeSpeed: 50,
             //backSpeed: 40,
             backDelay: 100,
-            showCursor: false // no cursor here
+            showCursor: false
           });
-        }, 1000); // adjust timing (1000ms = ~2 blinks)
+        }, 1000);
       }
     });
   }
