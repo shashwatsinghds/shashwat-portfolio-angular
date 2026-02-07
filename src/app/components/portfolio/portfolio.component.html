@@ -1,5 +1,8 @@
 <section id="portfolio" class="section portfolio-section">
-    <h2>Portfolio</h2>
+  <div class="portfolio-inner">
+    <div class="section-heading" appScrollReveal>
+      <h2>Portfolio</h2>
+    </div>
     
     <!-- Filter Tabs -->
     <div class="filter-tabs">
@@ -23,62 +26,88 @@
       </button>
     </div>
 
-    <div class="portfolio-container">
-      <div class="portfolio-item" *ngFor="let project of projects" (click)="openModal(project)">
-        <div class="portfolio-image-wrapper">
-          <img [src]="project.image" [alt]="project.title" class="portfolio-image" />
-          <div class="portfolio-title-overlay">
-            <h3>{{ project.title }}</h3>
+    <div class="portfolio-grid">
+      <div class="portfolio-card glass-card" *ngFor="let project of projects; let i = index" 
+           [style.transition-delay]="(i * 80) + 'ms'"
+           (click)="openModal(project)">
+        <div class="card-image-wrapper">
+          <img [src]="project.image" [alt]="project.title" class="card-image" />
+          <div class="card-overlay">
+            <span class="overlay-action">
+              <i class="bi bi-arrow-up-right"></i> View Details
+            </span>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">{{ project.title }}</h3>
+          <div class="card-tags" *ngIf="project.tags">
+            <span class="tag-pill" *ngFor="let tag of project.tags | slice:0:3">{{ tag }}</span>
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Project Modal -->
-    <div class="portfolio-modal" [class.active]="selectedProject" *ngIf="selectedProject">
-      <div class="modal-content">
-        <span class="close-modal" (click)="closeModal()">&times;</span>
-        <div class="modal-flex-container">
-          <div class="modal-carousel-section">
-            <div class="carousel-container">
-              <div class="carousel-track">
-                <img *ngFor="let slide of selectedProject?.slides; let i = index" 
-                     [src]="slide" 
-                     [alt]="selectedProject?.title" 
-                     class="carousel-slide"
-                     [class.active]="i === currentSlideIndex"
-                     [style.display]="i === currentSlideIndex ? 'block' : 'none'">
-              </div>
-              <div class="carousel-indicators">
-                <span *ngFor="let slide of selectedProject?.slides; let i = index" 
-                      class="indicator" 
-                      [class.active]="i === currentSlideIndex"
-                      (click)="goToSlide(i)"></span>
-              </div>
-              <div class="carousel-nav carousel-prev" (click)="previousSlide()">
-                <i class="bi bi-chevron-left"></i>
-              </div>
-              <div class="carousel-nav carousel-next" (click)="nextSlide()">
-                <i class="bi bi-chevron-right"></i>
-              </div>
-              <div class="carousel-play-pause" (click)="toggleAutoPlay()">
-                <i class="bi" [class.bi-play-fill]="!isAutoPlaying" [class.bi-pause-fill]="isAutoPlaying"></i>
-              </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div class="modal-backdrop" [class.active]="selectedProject" *ngIf="selectedProject" (click)="closeModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <div class="modal-layout">
+        <div class="modal-carousel-col">
+          <div class="carousel-container">
+            <div class="carousel-track">
+              <img *ngFor="let slide of selectedProject?.slides; let i = index" 
+                   [src]="slide" 
+                   [alt]="selectedProject?.title" 
+                   class="carousel-slide"
+                   [class.active]="i === currentSlideIndex"
+                   [style.display]="i === currentSlideIndex ? 'block' : 'none'">
             </div>
+            <div class="carousel-indicators">
+              <span *ngFor="let slide of selectedProject?.slides; let i = index" 
+                    class="indicator" 
+                    [class.active]="i === currentSlideIndex"
+                    (click)="goToSlide(i)"></span>
+            </div>
+            <button class="carousel-nav carousel-prev" (click)="previousSlide()">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="carousel-nav carousel-next" (click)="nextSlide()">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+            <button class="carousel-play-pause" (click)="toggleAutoPlay()">
+              <i class="bi" [class.bi-play-fill]="!isAutoPlaying" [class.bi-pause-fill]="isAutoPlaying"></i>
+            </button>
           </div>
-          <div class="modal-text-section">
-            <h3>{{ selectedProject?.title }}</h3>
-            <ul>
-              <li><strong>Project URL</strong>: <a [href]="selectedProject?.githubUrl" target="_blank">{{ selectedProject?.title }} Project</a></li>
-            </ul>
-            <p>{{ selectedProject?.description }}</p>
-            <p>Key highlights:</p>
+        </div>
+        <div class="modal-info-col">
+          <h3 class="modal-title">{{ selectedProject?.title }}</h3>
+          <div class="modal-meta">
+            <a [href]="selectedProject?.githubUrl" target="_blank" class="btn-ghost">
+              <i class="bi bi-github"></i> View on GitHub
+            </a>
+            <a *ngIf="selectedProject?.liveUrl" [routerLink]="['/project', selectedProject?.id, 'demo']" class="btn-primary">
+              <i class="bi bi-play-circle"></i> Live Demo
+            </a>
+          </div>
+          <p class="modal-description">{{ selectedProject?.description }}</p>
+          <div class="modal-highlights">
+            <h4>Key Highlights</h4>
             <ul>
               <li *ngFor="let highlight of selectedProject?.highlights">{{ highlight }}</li>
             </ul>
-            <p><strong>Impact:</strong> {{ selectedProject?.impact }}</p>
+          </div>
+          <div class="modal-impact">
+            <h4>Impact</h4>
+            <p>{{ selectedProject?.impact }}</p>
+          </div>
+          <div class="modal-tags" *ngIf="selectedProject?.tags">
+            <span class="tag-pill" *ngFor="let tag of selectedProject?.tags">{{ tag }}</span>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

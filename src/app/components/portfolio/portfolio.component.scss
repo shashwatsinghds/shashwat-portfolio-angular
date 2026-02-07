@@ -1,339 +1,457 @@
 .portfolio-section {
-    padding: 100px 20px;
-    min-height: 100vh;
-  }
-  
-  .portfolio-section h2 {
-    text-align: center;
-    color: #00aaff;
-    font-size: 2rem;
-    margin-bottom: 30px;
+  padding: var(--space-10) var(--space-5);
+  min-height: 100vh;
+}
+
+.portfolio-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: transparent;
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-default);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: inherit;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.filter-btn i {
+  font-size: 0.95rem;
+}
+
+.filter-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.filter-btn.active {
+  background: var(--accent-primary-muted);
+  color: var(--accent-primary);
+  border-color: rgba(129, 140, 248, 0.25);
+}
+
+/* Portfolio Grid */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-5);
+}
+
+/* Portfolio Card */
+.portfolio-card {
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--radius-lg);
+}
+
+.portfolio-card:hover {
+  border-color: var(--border-active);
+  box-shadow: 0 8px 40px var(--glow-primary);
+  transform: translateY(-4px);
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.portfolio-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9, 9, 11, 0.9) 0%, rgba(9, 9, 11, 0) 60%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: var(--space-4);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.portfolio-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.overlay-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent-primary);
+  padding: var(--space-2) var(--space-3);
+  background: var(--accent-primary-subtle);
+  border: 1px solid rgba(129, 140, 248, 0.15);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(10px);
+}
+
+.card-body {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.01em;
+}
+
+.card-tags {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   Modal Styles
+   ======================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  padding: var(--space-5);
+}
+
+.modal-backdrop.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  max-width: 1100px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: var(--space-6);
+  transform: scale(0.96);
+  opacity: 0;
+  transition: transform var(--transition-spring), opacity var(--transition-base);
+}
+
+.modal-backdrop.active .modal-container {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Custom scrollbar for modal */
+.modal-container::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-container::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: var(--radius-full);
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.modal-layout {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.modal-carousel-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-info-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+}
+
+.modal-meta {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.modal-description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: var(--space-5);
+}
+
+.modal-highlights {
+  margin-bottom: var(--space-5);
+
+  h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-3);
   }
 
-  // Filter Tabs
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    position: relative;
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-2);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+    }
+  }
+}
+
+.modal-impact {
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  background: var(--accent-primary-subtle);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--accent-primary);
+
+  h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.modal-tags {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   Carousel Styles
+   ======================================== */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+  background: var(--bg-base);
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-slide {
+  width: 100%;
+  object-fit: contain;
+  display: block;
+  background: transparent;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.indicator.active {
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--glow-primary);
+  width: 20px;
+  border-radius: var(--radius-full);
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-overlay);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  padding: 0;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  opacity: 0;
+}
+
+.carousel-container:hover .carousel-nav {
+  opacity: 1;
+}
+
+.carousel-nav:hover {
+  background: var(--accent-primary);
+  color: var(--bg-base);
+  border-color: var(--accent-primary);
+}
+
+.carousel-prev { left: var(--space-3); }
+.carousel-next { right: var(--space-3); }
+
+.carousel-play-pause {
+  position: absolute;
+  bottom: var(--space-7);
+  right: var(--space-3);
+  background: var(--bg-overlay);
+  backdrop-filter: blur(10px);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all var(--transition-fast);
+  opacity: 0;
+}
+
+.carousel-container:hover .carousel-play-pause {
+  opacity: 1;
+}
+
+.carousel-play-pause:hover {
+  background: var(--accent-primary);
+  color: var(--bg-base);
+  border-color: var(--accent-primary);
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-layout {
+    flex-direction: column;
+  }
+
+  .modal-container {
+    padding: var(--space-4);
+  }
+
   .filter-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
+    gap: var(--space-2);
   }
 
   .filter-btn {
-    background: rgba(0, 170, 255, 0.1);
-    color: #00aaff;
-    border: 2px solid rgba(0, 170, 255, 0.3);
-    padding: 12px 24px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    backdrop-filter: blur(10px);
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.8rem;
   }
-
-  .filter-btn i {
-    font-size: 1.1rem;
-  }
-
-  .filter-btn:hover {
-    background: rgba(0, 170, 255, 0.2);
-    border-color: #00aaff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 170, 255, 0.3);
-  }
-
-  .filter-btn.active {
-    background: linear-gradient(135deg, #00aaff, #0088cc);
-    color: #fff;
-    border-color: #00aaff;
-    box-shadow: 0 4px 20px rgba(0, 170, 255, 0.4);
-  }
-
-  .filter-btn.active:hover {
-    background: linear-gradient(135deg, #0088cc, #006699);
-    transform: translateY(-2px) scale(1.02);
-  }
-  
-  .portfolio-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .portfolio-item {
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  .portfolio-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 32px rgba(0, 170, 255, 0.3);
-    border: 1px solid #e6e600;
-  }
-  
-  .portfolio-image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .portfolio-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  .portfolio-item:hover .portfolio-image {
-    transform: scale(1.1);
-  }
-  
-  .portfolio-title-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    padding: 20px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-  }
-  
-  .portfolio-item:hover .portfolio-title-overlay {
-    transform: translateY(0);
-  }
-  
-  .portfolio-title-overlay h3 {
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-    letter-spacing: 0.5px;
-  }
-  
-  // Modal styles
-  .portfolio-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .portfolio-modal.active {
-    display: flex;
-    opacity: 1;
-  }
-  
-  .modal-content {
-    background: #1a1a1a;
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 90%;
-    max-height: 90%;
-    overflow-y: auto;
-    position: relative;
-    transform: scale(0.95) rotate(-1deg);
-    opacity: 0;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  }
-  
-  .portfolio-modal.active .modal-content {
-    transform: scale(1) rotate(0);
-    opacity: 1;
-    box-shadow: 0 25px 80px rgba(0, 170, 255, 0.2);
-  }
-  
-  .close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 2rem;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1001;
-  }
-  
-  .close-modal:hover {
-    color: #e6e600;
-  }
-  
-  .modal-flex-container {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-  }
-  
-  .modal-carousel-section {
-    flex: 1;
-    max-width: 50%;
-  }
-  
-  .modal-text-section {
-    flex: 1;
-    max-width: 50%;
-    color: #fff;
-  }
-  
-  .modal-text-section h3 {
-    color: #00aaff;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .modal-text-section p {
-    color: #ccc;
-    line-height: 1.6;
-    margin: 15px 0;
-  }
-  
-  .modal-text-section ul {
-    color: #ccc;
-    margin: 15px 0;
-    padding-left: 20px;
-  }
-  
-  .modal-text-section li {
-    margin: 8px 0;
-  }
-  
-  .modal-text-section a {
-    color: #00aaff;
-    text-decoration: none;
-  }
-  
-  .modal-text-section a:hover {
-    color: #e6e600;
-  }
-  
-  // Carousel styles
-  .carousel-container {
-    position: relative;
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 2px solid #00aaff;
-  }
-  
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-    height: 100%;
-    position: relative;
-    width: 100%;
-  }
-  
-  .carousel-slide {
-    height: 100%;
-    object-fit: contain;
-    background: #000;
-    width: 100%;
-    display: block;
-    background: transparent;
-  }
-  
-  .carousel-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 170, 255, 0.8);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-  
-  .carousel-nav:hover {
-    background: #e6e600;
-    color: #000;
-    transform: translateY(-50%) scale(1.1);
-  }
-  
-  .carousel-prev {
-    left: 10px;
-  }
-  
-  .carousel-next {
-    right: 10px;
-  }
-  
-  .carousel-play-pause {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  .carousel-play-pause:hover {
-    background: #00aaff;
-    transform: scale(1.1);
-  }
-
-  // Responsive styles
-  @media (max-width: 768px) {
-    .filter-tabs {
-      gap: 10px;
-      padding: 0 10px;
-    }
-
-    .filter-btn {
-      padding: 10px 18px;
-      font-size: 0.9rem;
-    }
-
-    .filter-btn i {
-      font-size: 1rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .filter-tabs {
-      gap: 8px;
-    }
-
-    .filter-btn {
-      padding: 8px 16px;
-      font-size: 0.85rem;
-      gap: 6px;
-    }
-  }
+}

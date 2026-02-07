@@ -5,7 +5,6 @@ import { AboutComponent } from './components/about/about.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { CareerPathComponent } from './components/careerpath/careerpath.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { DownloadsComponent } from './components/downloads/downloads.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BackgroundComponent } from './components/background/background.component';
 import { GithubContributionsComponent } from './components/github-contributions/github-contributions.component';
@@ -21,7 +20,6 @@ import { GithubContributionsComponent } from './components/github-contributions/
     PortfolioComponent, 
     CareerPathComponent, 
     ContactComponent, 
-    DownloadsComponent,
     NavbarComponent, 
     BackgroundComponent,
     GithubContributionsComponent

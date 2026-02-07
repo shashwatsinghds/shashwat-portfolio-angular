@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PortfolioService } from '../../services/portfolio.services';
 import { Project } from '../../models/project.model';
+import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink, ScrollRevealDirective],
   standalone: true
 })
 export class PortfolioComponent implements OnInit {
@@ -39,17 +41,18 @@ export class PortfolioComponent implements OnInit {
     this.selectedProject = project;
     this.currentSlideIndex = 0;
     this.startAutoPlay();
+    document.body.style.overflow = 'hidden';
   }
 
   closeModal(): void {
     this.selectedProject = null;
     this.stopAutoPlay();
+    document.body.style.overflow = '';
   }
 
   nextSlide(): void {
     if (this.selectedProject) {
       this.currentSlideIndex = (this.currentSlideIndex + 1) % this.selectedProject.slides.length;
-      this.stopAutoPlay();
     }
   }
 
@@ -58,7 +61,6 @@ export class PortfolioComponent implements OnInit {
       this.currentSlideIndex = this.currentSlideIndex === 0 
         ? this.selectedProject.slides.length - 1 
         : this.currentSlideIndex - 1;
-      this.stopAutoPlay();
     }
   }
 
@@ -73,11 +75,11 @@ export class PortfolioComponent implements OnInit {
   goToSlide(index: number): void {
     if (this.selectedProject && index >= 0 && index < this.selectedProject.slides.length) {
       this.currentSlideIndex = index;
-      this.stopAutoPlay();
     }
   }
 
   private startAutoPlay(): void {
+    this.stopAutoPlay();
     this.isAutoPlaying = true;
     this.autoPlayInterval = setInterval(() => {
       this.nextSlide();
@@ -88,6 +90,7 @@ export class PortfolioComponent implements OnInit {
     this.isAutoPlaying = false;
     if (this.autoPlayInterval) {
       clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
     }
   }
 }
