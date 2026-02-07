@@ -1,18 +1,35 @@
-<section id="home" class="section">
-  <div class="intro">
-    <h1><span class="name-title"></span></h1>
-    <h3 class="role-title"></h3>
-    <p>Analyzing data, building intelligent systems, and shaping insights for the future.</p>
-    <div class="social-links">
-      <a href="https://www.linkedin.com/in/shashwatsinghds" target="_blank" class="linkedin">
-        <i class="bi bi-linkedin"></i>
-      </a>
-      <a href="https://github.com/shashwatsinghds" target="_blank" class="github">
-        <i class="bi bi-github"></i>
-      </a>
+<section id="home" class="section home-section">
+  <!-- Gradient orb background effects -->
+  <div class="hero-glow hero-glow-primary"></div>
+  <div class="hero-glow hero-glow-secondary"></div>
+
+  <div class="hero-container">
+    <div class="hero-content">
+      <h1 class="hero-name"><span class="name-title"></span></h1>
+      <h3 class="role-title"></h3>
+      <p class="hero-tagline">Analyzing data, building intelligent systems, and shaping insights for the future.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" (click)="scrollToPortfolio()">
+          <i class="bi bi-arrow-right"></i> View My Work
+        </a>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/shashwatsinghds" target="_blank" class="social-icon" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a href="https://github.com/shashwatsinghds" target="_blank" class="social-icon" aria-label="GitHub">
+            <i class="bi bi-github"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image-container">
+      <div class="image-glow"></div>
+      <img src="assets/files/Pictures/Profile.jpg" alt="Shashwat Singh" class="hero-image">
     </div>
   </div>
-  <div class="profile-pic-container">
-    <img src="assets/files/Pictures/Profile.jpg" alt="My Picture" class="profile-pic">
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
   </div>
 </section>

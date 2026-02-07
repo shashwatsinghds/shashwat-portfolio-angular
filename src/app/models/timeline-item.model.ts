@@ -4,6 +4,6 @@ export interface TimelineItem {
   subtitle: string;
   period: string;
   image: string;
-  position: 'left' | 'right';
+  position?: 'left' | 'right';
   imageClass?: string;
 }

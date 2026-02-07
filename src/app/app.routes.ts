@@ -4,7 +4,6 @@ import { AboutComponent } from './components/about/about.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { CareerPathComponent } from './components/careerpath/careerpath.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { DownloadsComponent } from './components/downloads/downloads.component';
 import { GithubContributionsComponent } from './components/github-contributions/github-contributions.component';
 
 export const routes: Routes = [
@@ -13,8 +12,11 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'career-path', component: CareerPathComponent },
-  {path: 'github-contributions', component: GithubContributionsComponent},
+  { path: 'github-contributions', component: GithubContributionsComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'downloads', component: DownloadsComponent },
+  { 
+    path: 'project/:id/demo', 
+    loadComponent: () => import('./components/project-viewer/project-viewer.component').then(m => m.ProjectViewerComponent)
+  },
   { path: '**', redirectTo: '/home' }
 ];

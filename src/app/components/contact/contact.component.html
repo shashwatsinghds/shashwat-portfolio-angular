@@ -1,37 +1,61 @@
 <section id="contact" class="section contact-section">
-    <h2>Contact</h2>
-    <div class="contact-container">
-      <!-- Social Profiles -->
-      <div class="contact-item">
-        <div class="contact-icon">
+  <div class="contact-inner">
+    <div class="section-heading" appScrollReveal>
+      <h2>Get in Touch</h2>
+    </div>
+
+    <div class="contact-columns" appScrollReveal [revealDelay]="150">
+      <!-- Email -->
+      <div class="contact-col">
+        <div class="col-icon">
           <i class="bi bi-envelope"></i>
         </div>
-        <h3>Social Profiles</h3>
-        <div class="social-icons">
-          <a href="https://www.linkedin.com/in/shashwatsinghds" target="_blank">
-            <i class="bi bi-linkedin"></i>
+        <h3>Email</h3>
+        <div class="email-row">
+          <span class="email-text">singhshashwat1996&#64;gmail.com</span>
+          <button class="copy-btn" (click)="copyEmail('singhshashwat1996@gmail.com')" title="Copy to clipboard">
+            <i class="bi bi-clipboard"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="col-divider"></div>
+
+      <!-- Social -->
+      <div class="contact-col">
+        <div class="col-icon">
+          <i class="bi bi-people"></i>
+        </div>
+        <h3>Connect</h3>
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/shashwatsinghds" target="_blank" class="social-chip">
+            <i class="bi bi-linkedin"></i> LinkedIn
           </a>
-          <a href="https://github.com/shashwatsinghds" target="_blank">
-            <i class="bi bi-github"></i>
+          <a href="https://github.com/shashwatsinghds" target="_blank" class="social-chip">
+            <i class="bi bi-github"></i> GitHub
           </a>
         </div>
       </div>
-  
-      <!-- Email Me -->
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="bi bi-envelope"></i>
+
+      <!-- Divider -->
+      <div class="col-divider"></div>
+
+      <!-- Download CV -->
+      <div class="contact-col">
+        <div class="col-icon">
+          <i class="bi bi-file-earmark-text"></i>
         </div>
-        <h3>Email Me</h3>
-        <p>
-          singhshashwat1996&#64;gmail.com
-          <i class="bi bi-clipboard copy-icon" (click)="copyEmail('singhshashwat1996@gmail.com')"></i>
-        </p>
-        
-        <!-- Notification Message -->
-        <div id="copyNotification" class="copy-notification" [class.show]="showNotification">
-          Email copied to clipboard!
-        </div>
+        <h3>Resume</h3>
+        <a href="assets/files/CV_ShashwatSingh_Main.pdf" download class="download-chip">
+          <i class="bi bi-download"></i> Download CV
+        </a>
       </div>
     </div>
-  </section>
+
+    <!-- Copy notification -->
+    <div class="copy-notification" [class.show]="showNotification">
+      <i class="bi bi-check-circle"></i> Copied to clipboard
+    </div>
+  </div>
+</section>

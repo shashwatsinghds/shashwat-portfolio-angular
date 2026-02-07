@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  standalone: true
+  standalone: true,
+  imports: [ScrollRevealDirective]
 })
 export class ContactComponent {
   showNotification = false;

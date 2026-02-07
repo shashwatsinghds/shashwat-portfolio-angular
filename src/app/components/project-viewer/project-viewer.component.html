@@ -1,0 +1,55 @@
+<div class="viewer-container">
+  <!-- Toolbar -->
+  <div class="viewer-toolbar">
+    <div class="toolbar-left">
+      <button class="toolbar-btn close-btn" (click)="goBack()" title="Go back">
+        <i class="bi bi-arrow-left"></i>
+      </button>
+      <div class="toolbar-info" *ngIf="project">
+        <span class="toolbar-dot"></span>
+        <span class="toolbar-title">{{ project.title }}</span>
+      </div>
+    </div>
+    <div class="toolbar-right">
+      <button class="toolbar-btn" (click)="openExternal()" title="Open in new tab">
+        <i class="bi bi-box-arrow-up-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div class="viewer-loading" *ngIf="isLoading && !loadError">
+    <div class="loader-spinner"></div>
+    <p>Loading project demo...</p>
+  </div>
+
+  <!-- Error state -->
+  <div class="viewer-error" *ngIf="loadError">
+    <div class="error-icon">
+      <i class="bi bi-exclamation-triangle"></i>
+    </div>
+    <h3>Unable to load demo</h3>
+    <p>The project demo could not be loaded in the viewer.</p>
+    <div class="error-actions">
+      <button class="btn-primary" (click)="openExternal()">
+        <i class="bi bi-box-arrow-up-right"></i> Open in New Tab
+      </button>
+      <button class="btn-ghost" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Go Back
+      </button>
+    </div>
+  </div>
+
+  <!-- Iframe -->
+  <iframe
+    *ngIf="safeUrl && !loadError"
+    [src]="safeUrl"
+    class="viewer-iframe"
+    [class.loaded]="!isLoading"
+    (load)="onIframeLoad()"
+    (error)="onIframeError()"
+    sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    title="Project Live Demo">
+  </iframe>
+</div>

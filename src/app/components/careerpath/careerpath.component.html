@@ -1,21 +1,32 @@
 <section id="career-path" class="section career-path-section">
-    <h2 style="position: relative; display: inline-block; padding-bottom: 10px; color: var(--main-blue); font-size: 2rem; font-weight: 600;">Career Path</h2>
+  <div class="career-path-inner">
+    <div class="section-heading">
+      <h2>Career Path</h2>
+    </div>
     <div class="timeline">
+      <!-- Background line -->
+      <div class="timeline-line"></div>
+      <!-- Animated progress fill -->
       <div class="timeline-progress"></div>
-      <div class="timeline-item" 
-           *ngFor="let item of timelineItems; let i = index" 
-           [class.left]="item.position === 'left'"
-           [class.right]="item.position === 'right'">
-        <div class="timeline-connector"></div>
-        <div class="timeline-image" [class]="item.imageClass">
-          <img [src]="item.image" [alt]="item.title" (error)="onImageError($event)">
+
+      <div class="timeline-item" *ngFor="let item of timelineItems; let i = index">
+        <!-- Dot on the line -->
+        <div class="timeline-dot">
+          <div class="dot-ring"></div>
         </div>
-        <div class="timeline-content">
-          <h3>{{ item.title }}</h3>
-          <h4>{{ item.subtitle }}</h4>
-          <p>{{ item.period }}</p>
+
+        <!-- Card -->
+        <div class="timeline-card">
+          <div class="card-logo" [class]="item.imageClass || ''">
+            <img [src]="item.image" [alt]="item.title" (error)="onImageError($event)">
+          </div>
+          <div class="card-text">
+            <span class="card-role">{{ item.subtitle }}</span>
+            <span class="card-company">{{ item.title }}</span>
+          </div>
+          <span class="card-period">{{ item.period }}</span>
         </div>
       </div>
     </div>
-    
-  </section>
+  </div>
+</section>

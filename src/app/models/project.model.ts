@@ -9,4 +9,5 @@ export interface Project {
   impact: string;
   category: 'all' | 'ml-ai' | 'software' | 'full-stack';
   tags?: string[];
+  liveUrl?: string;
 }

@@ -87,7 +87,7 @@ class Node {
     this.y = Math.random() * canvas.height;
     this.vx = (Math.random() - 0.5) * 0.3;
     this.vy = (Math.random() - 0.5) * 0.3;
-    this.radius = Math.random() * 2 + 1.5;
+    this.radius = Math.random() * 1.2 + 0.8;
   }
 
   update(): void {
@@ -101,7 +101,7 @@ class Node {
   draw(ctx: CanvasRenderingContext2D): void {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = '#e6e600';
+    ctx.fillStyle = 'rgba(129, 140, 248, 0.6)';
     ctx.fill();
   }
 
@@ -129,8 +129,8 @@ class Node {
       ctx.beginPath();
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(node.x, node.y);
-      ctx.strokeStyle = 'rgba(230, 230, 0, 0.6)';
-      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = 'rgba(129, 140, 248, 0.12)';
+      ctx.lineWidth = 0.5;
       ctx.stroke();
     });
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 
 interface ContributionDay {
   date: string;
@@ -85,7 +86,7 @@ interface GitHubData {
 
 @Component({
   selector: 'app-github-contributions',
-  imports: [],
+  imports: [ScrollRevealDirective],
   templateUrl: './github-contributions.component.html',
   styleUrl: './github-contributions.component.scss'
 })
@@ -279,7 +280,7 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
         rect.setAttribute("y", (dayIndex * (cellSize + cellGap)).toString());
         rect.setAttribute("width", cellSize.toString());
         rect.setAttribute("height", cellSize.toString());
-        rect.setAttribute("fill", day.color || "#eee");
+        rect.setAttribute("fill", this.toDarkColor(day.color, day.contributionCount));
         rect.setAttribute("data-date", day.date);
         rect.setAttribute("data-count", day.contributionCount.toString());
 
@@ -529,6 +530,24 @@ export class GithubContributionsComponent implements OnInit, AfterViewInit {
       existingWrapper.remove();
     }
     this.loadContributions();
+  }
+
+  /** Map GitHub light-mode heatmap colors to dark-mode equivalents */
+  private toDarkColor(color: string | undefined, count: number): string {
+    if (!color || count === 0) return '#161b22';
+    const map: Record<string, string> = {
+      '#ebedf0': '#161b22',  // empty
+      '#9be9a8': '#0e4429',  // level 1
+      '#40c463': '#006d32',  // level 2
+      '#30a14e': '#26a641',  // level 3
+      '#216e39': '#39d353',  // level 4
+      // Older API color variants
+      '#c6e48b': '#0e4429',
+      '#7bc96f': '#006d32',
+      '#239a3b': '#26a641',
+      '#196127': '#39d353',
+    };
+    return map[color.toLowerCase()] || map[color] || color;
   }
 
   // Dial animation for numbers
